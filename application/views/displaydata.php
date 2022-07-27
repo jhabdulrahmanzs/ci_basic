@@ -17,6 +17,7 @@ table, th, td {
     <th>First name</th>
     <th>Last name</th>
     <th>Email Id</th>
+    <th>Phone</th>
     <th>Update</th>
     <th>Delete</th>
   </tr>
@@ -27,11 +28,12 @@ table, th, td {
     {
     echo "<tr>";
     echo "<td>".$i."</td>";
-    echo "<td>".$row->first_name."</td>";
-    echo "<td>".$row->last_name."</td>";
-    echo "<td>".$row->email."</td>";
+    echo "<td>".$row->firstname."</td>";
+    echo "<td>".$row->lastname."</td>";
+    echo "<td>".$row->useremail."</td>";
+    echo "<td>".$row->phone."</td>";
     echo "<td><a href='updatedata?id=".$row->id."'>Update</a></td>";
-    echo "<td><a href='deletedata?id=".$row->id."'>Delete</a></td>";
+    echo "<td><a href='RegisterController/deleterecords?id=".$row->id."'>Delete</a></td>";
     echo "</tr>";
     $i++;
     // }
