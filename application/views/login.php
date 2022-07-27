@@ -34,7 +34,7 @@
                         </div>
                         <div class="btns">
                             <input type="submit" class="btn btn-outline-primary btn-sm signup" id="reg-btn" name="Login" value="Login"><br>
-                            <span class="signin-link">If You Don't have an Account?Register Here <a href="register.php">Register</a></span>
+                            <span class="signin-link">If You Don't have an Account?Register Here <a href="<?php echo base_url('/register'); ?>">Register</a></span>
                         </div>
 
                     </form>
