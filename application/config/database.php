@@ -74,15 +74,16 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-    'dsn'   => '',
-    'hostname' => 'localhost',
-    'username' => 'root',
-    'password' => '',
-    'database' => 'cicrud',
-    'dbdriver' => 'mysqli',
+    'dsn'    => '',
+    'hostname' => 'ZSCHN01LP0045',
+    'username' => 'sa',
+    'password' => 'Password@1',
+    'database' => 'ci_basic',    
+    'dbdriver' => 'sqlsrv',
+    'msdriver' => 'ODBC Driver 17 for SQL Server', //Added by Zuci Systems
     'dbprefix' => '',
-    'pconnect' => TRUE,
-    'db_debug' => TRUE,
+    'pconnect' => FALSE,
+    'db_debug' => (ENVIRONMENT !== 'production'),
     'cache_on' => FALSE,
     'cachedir' => '',
     'char_set' => 'utf8',
@@ -94,4 +95,3 @@ $db['default'] = array(
     'failover' => array(),
     'save_queries' => TRUE
 );
-
