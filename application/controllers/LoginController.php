@@ -12,19 +12,16 @@ class LoginController extends CI_Controller
         $this->load->library('session');
 
         $this->load->model('LoginModel');
- 
-
     }
 
     public function index()
     {
         $this->load->view('login');
-     
     }
     public function main()
     {
 
-        
+
         $this->load->view('main');
     }
     public function login_valid()
@@ -35,25 +32,22 @@ class LoginController extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $this->index();
-            }
-         else {
-            $data=array(
-
-                'useremail' => $this->input->post('user_email'),        
-                'password'=>$this->input->post('user_pwd')
+        } else {
+            $useremail = $this->input->post('useremail');
+            $password = $this->input->post('password');
+            if ($this->LoginModel->login($useremail, $password)) {
+                $session_data = array(
+                    'useremail' => $useremail
                 );
-                $login= new LoginModel;
-                $check=$login->login($data);
-                if($check)
-                {
-                    $this->session->set_flashdata('status','registered successfully!! Go to Login');
-                    redirect(base_url('crud/displaydata'));
-                }
-                else
-                {
-                    $this->session->set_flashdata('status','registered failed!!!');
-                    redirect(base_url('login'));
-                }
+                $this->session->set_userdata($session_data);
+                echo "success";
+                redirect('crud/displaydata');
+            }
+            else
+            {
+                echo "checking data has an issues";
+                redirect('login');
+            }
         }
     }
 }
