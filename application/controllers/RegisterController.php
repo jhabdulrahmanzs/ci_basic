@@ -7,9 +7,8 @@ class RegisterController extends CI_Controller
 
         $this->load->database();
         $this->load->helper(array('form', 'url'));
-
+        $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->load->library('session');
 
         $this->load->model('RegisterModel');
     }
@@ -25,26 +24,35 @@ class RegisterController extends CI_Controller
     {
 
         if ($this->input->post('savedata')) {
-                $this->form_validation->set_rules('first_name', 'Firstname', 'required');
-                $this->form_validation->set_rules('last_name', 'Lastname', 'required');
-                $this->form_validation->set_rules('useremail', 'Useremail', 'required');
-                $this->form_validation->set_rules('user_phone', 'Userphone', 'required');
-                $this->form_validation->set_rules('password', 'Password', 'required');
-                if ($this->form_validation->run() == true) {
-                $data['firstname'] = $this->input->post('first_name');
-                $data['lastname'] = $this->input->post('last_name');
-                $data['useremail'] = $this->input->post('user_email');
-                $data['phone'] = $this->input->post('user_phone');
-                $data['password'] = $this->input->post('user_pwd');
-                $response = $this->RegisterModel->saverecords($data);
-                if ($response == true) {
-                    echo "record inserted successfully!";
-                    redirect(base_url('crud/displaydata'));
-                } else {
-                    echo "Insert error!";
+                $this->form_validation->set_rules('first_name', 'Firstname', 'trim|required|alpha');
+                $this->form_validation->set_rules('last_name', 'Lastname', 'trim|required|alpha');
+                $this->form_validation->set_rules('user_email', 'Useremail', 'trim|required|valid_email|is_unique[register.useremail]');
+                $this->form_validation->set_rules('user_phone', 'Userphone', 'trim|required');
+                $this->form_validation->set_rules('user_pwd', 'Password', 'trim|required');
+                if ($this->form_validation->run() == FALSE) {
+              
+                $this->index();
+            }
+             else {
+                $data=array(
+                'firstname' => $this->input->post('first_name'),
+                'lastname' =>  $this->input->post('last_name'),
+                'useremail' => $this->input->post('user_email'),
+                'phone'=>$this->input->post('user_phone'),
+                'password'=>$this->input->post('user_pwd')
+                );
+                $regiseter= new RegisterModel;
+                $check=$regiseter->saverecords($data);
+                if($check)
+                {
+                    $this->session->set_flashdata('status','registered successfully!! Go to Login');
+                    redirect(base_url('login'));
                 }
-            } else {
-                echo validation_errors();
+                else
+                {
+                    $this->session->set_flashdata('status','registered failed!!!');
+                    redirect(base_url('register'));
+                }
             }
         }
     }
@@ -65,8 +73,15 @@ class RegisterController extends CI_Controller
         if ($this->input->post('update')) {
             $first_name = $this->input->post('first_name');
             $last_name = $this->input->post('last_name');
-            $email = $this->input->post('email');
-            $this->RegisterModel->updaterecords($first_name, $last_name, $email, $id);
+            $useremail = $this->input->post('user_email');
+            $phonenumber=$this->input->post('user_phone');
+            $array = array(
+                'firstname' => $first_name,
+                'lastname' => $last_name,
+                'useremail' => $useremail,
+                'phone'=>$phonenumber
+        );
+            $this->RegisterModel->updaterecords($array,$id);
             return redirect('crud/displaydata');
             // if( $updated == true){
             //     // echo "Date updated Successfully";

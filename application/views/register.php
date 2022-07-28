@@ -24,28 +24,28 @@
                         <div class="form-group">
                             <label class="required" for="fname">First Name</label>
                             <input type="text" class="form-control" id="firstname" placeholder="User Name" name="first_name">
-                            <span class="error" id="firstname_err"></span>
+                            <small><?php echo form_error('first_name')?></small>
                         </div>
                         <div class="form-group">
                             <label class="required" for="lname">last Name</label>
                             <input type="text" class="form-control" id="lastname" placeholder="User Name" name="last_name">
-                            <span class="error" id="lastname_err"></span>
+                            <small><?php echo form_error('last_name')?></small>
                         </div>
                         <div class="form-group">
                             <label class="required" for="useremail">Email ID</label>
                             <input type="email" class="form-control" id="useremail" title="Invalid email address" placeholder="Email Address" name="user_email">
-                            <span class="error" id="useremail_err"></span>
+                            <small><?php echo form_error('user_email')?></small>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label required" for="phoneNumber">Phone Number</label>
                             <input type="tel" id="phonenumber" class="form-control" name="user_phone" placeholder="Phone no" />
-                            <span class="error" id="phonenumber_err"></span>
+                            <small><?php echo form_error('user_phone')?></small>
                         </div>
                         <div class="form-group">
                             <label class="required" for="pwd">Password</label>
                             <input type="password" class="form-control" id="password" placeholder="Password" name="user_pwd">
-                            <span class="error" id="password_err"></span>
+                            <small><?php echo form_error('user_pwd')?></small>
                         </div>
                         <div id="formErr">
 

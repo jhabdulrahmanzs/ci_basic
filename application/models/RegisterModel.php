@@ -27,17 +27,10 @@ class RegisterModel extends CI_Model
 
     }
 
-    function updaterecords($first_name,$last_name,$useremail,$phonenumber,$id){
-        $array = array(
-            'firstname' => $first_name,
-            'lastname' => $last_name,
-            'useremail' => $useremail,
-            'phone'=>$phonenumber
-    );
-    
-    $this->db->set($array);
+    function updaterecords($array,$id){
+    //$this->db->set($array);
     $this->db->where('id', $id);
-    $this->db->update('register');
+    $this->db->update('register',$array);
         
 
 
