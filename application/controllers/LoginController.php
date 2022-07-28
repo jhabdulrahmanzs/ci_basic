@@ -11,44 +11,49 @@ class LoginController extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('session');
 
-
-        //$this->load->library('form_validation');
-
-        // $this->load->model('LoginModel');
+        $this->load->model('LoginModel');
+ 
 
     }
 
     public function index()
     {
         $this->load->view('login');
-        $this->form_validation->set_rules('useremail', 'Useremail', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-
-        if ($this->form_validation->run() == true) {
-            $useremail = $this->input->post('useremail');
-            $password = $this->input->post('password');
-            $this->load->model('LoginModel');
-            if ($this->LoginModel->login($useremail, $password)) {
-                $session_data = array(
-                    'useremail' => $useremail
-                );
-                $this->session->set_userdata($session_data);
-                echo "success";
-                redirect('crud/displaydata');
-            } else {
-                echo "fail";
-                echo validation_errors();
-            }
-        } else {
-            echo validation_errors();
-            // redirect('login');
-        }
+     
     }
     public function main()
     {
+
+        
         $this->load->view('main');
     }
     public function login_valid()
     {
+
+        $this->form_validation->set_rules('useremail', 'Useremail', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->index();
+            }
+         else {
+            $data=array(
+
+                'useremail' => $this->input->post('user_email'),        
+                'password'=>$this->input->post('user_pwd')
+                );
+                $login= new LoginModel;
+                $check=$login->login($data);
+                if($check)
+                {
+                    $this->session->set_flashdata('status','registered successfully!! Go to Login');
+                    redirect(base_url('crud/displaydata'));
+                }
+                else
+                {
+                    $this->session->set_flashdata('status','registered failed!!!');
+                    redirect(base_url('login'));
+                }
+        }
     }
 }
