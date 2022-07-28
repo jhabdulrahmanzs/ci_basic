@@ -25,12 +25,12 @@ class RegisterController extends CI_Controller
     {
 
         if ($this->input->post('savedata')) {
-            $this->form_validation->set_rules('first_name', 'Firstname', 'required');
-            $this->form_validation->set_rules('last_name', 'Lastname', 'required');
-            $this->form_validation->set_rules('useremail', 'Useremail', 'required');
-            $this->form_validation->set_rules('user_phone', 'Userphone', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required');
-            if ($this->form_validation->run() == true) {
+                $this->form_validation->set_rules('first_name', 'Firstname', 'required');
+                $this->form_validation->set_rules('last_name', 'Lastname', 'required');
+                $this->form_validation->set_rules('useremail', 'Useremail', 'required');
+                $this->form_validation->set_rules('user_phone', 'Userphone', 'required');
+                $this->form_validation->set_rules('password', 'Password', 'required');
+                if ($this->form_validation->run() == true) {
                 $data['firstname'] = $this->input->post('first_name');
                 $data['lastname'] = $this->input->post('last_name');
                 $data['useremail'] = $this->input->post('user_email');
