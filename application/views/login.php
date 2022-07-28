@@ -18,7 +18,7 @@
                 <div class="form-container">
                     <h3 class="title">Login</h3>
                     <div id="message"></div>
-                    <form class="form-horizontal" action="<?php echo base_url('LoginController/login_valid');?>" method="post" id="form">
+                    <form class="form-horizontal" action="<?php echo base_url('LoginController');?>" method="post" id="form">
                         <div class="form-group">
                             <label>User Email</label>
                             <input type="text" class="form-control" placeholder="User Email" name="useremail" id="useremail">

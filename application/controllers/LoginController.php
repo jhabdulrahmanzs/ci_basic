@@ -11,7 +11,7 @@ class LoginController extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('session');
 
-        
+
         //$this->load->library('form_validation');
 
         // $this->load->model('LoginModel');
@@ -21,6 +21,28 @@ class LoginController extends CI_Controller
     public function index()
     {
         $this->load->view('login');
+        $this->form_validation->set_rules('useremail', 'Useremail', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if ($this->form_validation->run() == true) {
+            $useremail = $this->input->post('useremail');
+            $password = $this->input->post('password');
+            $this->load->model('LoginModel');
+            if ($this->LoginModel->login($useremail, $password)) {
+                $session_data = array(
+                    'useremail' => $useremail
+                );
+                $this->session->set_userdata($session_data);
+                echo "success";
+                redirect('crud/displaydata');
+            } else {
+                echo "fail";
+                echo validation_errors();
+            }
+        } else {
+            echo validation_errors();
+            // redirect('login');
+        }
     }
     public function main()
     {
@@ -28,37 +50,5 @@ class LoginController extends CI_Controller
     }
     public function login_valid()
     {
-       
-
-        $this->form_validation->set_rules('useremail','Useremail','required');
-        $this->form_validation->set_rules('password','Password','required');
-
-        if($this->form_validation->run() == true)
-        {
-            $useremail=$this->input->post('useremail');
-            $password=$this->input->post('password');
-            $this->load->model('LoginModel');
-            if($this->LoginModel->login($useremail,$password))
-            {
-                $session_data =array(
-                    'useremail'=>$useremail
-                );
-                $this->session->set_userdata($session_data);
-                echo "success";
-                redirect('LoginController/main');
-            }
-            else
-            {
-                echo "faileds";
-                echo validation_errors();
-               
-            }
-        }
-        else
-        {
-            echo validation_errors();
-            //redirect('login');
-        }
     }
 }
-?>
