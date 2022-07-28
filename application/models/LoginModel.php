@@ -2,9 +2,12 @@
 use JetBrains\PhpStorm\Internal\ReturnTypeContract;
 
 class LoginModel extends CI_Model {
-	public function login($data)
+	public function login($useremail,$password)
     {
-        $query=$this->db->get('register',$data);
+        $this->db->where('useremail',$useremail);
+        $this->db->where('password',$password); 
+
+        $query=$this->db->get('register');
 
         if($query->num_rows()>0)
         {
