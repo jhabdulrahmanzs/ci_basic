@@ -52,7 +52,7 @@
                         </div>
                         <div class="btns">
                             <input type="submit" class="btn btn-outline-primary btn-sm signup" id="reg-btn" name="savedata" value="Create Account">
-                            <span class="signin-link">Already have an account? Click here to <a href="login.php">Login</a></span>
+                            <span class="signin-link">Already have an account? Click here to <a href="<?php echo base_url('/login'); ?>">Login</a></span>
                         </div>
 
                     </form>

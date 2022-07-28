@@ -33,7 +33,7 @@ table, th, td {
     echo "<td>".$row->useremail."</td>";
     echo "<td>".$row->phone."</td>";
     echo "<td><a href='updatedata?id=".$row->id."'>Update</a></td>";
-    echo "<td><a href='RegisterController/deleterecords?id=".$row->id."'>Delete</a></td>";
+    echo "<td><a href='deletedata?id=".$row->id."'>Delete</a></td>";
     echo "</tr>";
     $i++;
     // }

@@ -51,8 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['register'] = 'RegisterController';
 $route['login'] = 'LoginController';
+$route['LoginController/main'] = 'LoginController/main';
+$route['LoginController/login_valid'] = 'LoginController/login_valid';
 $route['crud/displaydata'] = 'RegisterController/displaydata';
-$route['crud/deleterecords//(:any)'] = 'RegisterController/deleterecords/$1';
+$route['crud/updatedata'] = 'RegisterController/updatedata';
+$route['crud/deletedata'] = 'RegisterController/deletedata';
 $route['create'] = 'crudajax';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
